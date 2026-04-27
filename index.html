@@ -3,46 +3,550 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi página</title>
+  <title>Alejandro Suárez | Data, BI & AI</title>
+
+  <!-- Frameworks -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dark: "#050505",
+            panel: "#101010",
+            panel2: "#171717",
+            cyanx: "#1B8CA3",
+            bluex: "#2456C7"
+          },
+          boxShadow: {
+            glow: "0 0 40px rgba(27,140,163,.25)"
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #050505;
-      color: white;
-      display: grid;
-      place-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-    .card {
-      max-width: 700px;
-      padding: 40px;
-    }
-    h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 20px;
-      color: #cfcfcf;
-    }
-    a {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 22px;
-      background: #2563eb;
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
+    html{scroll-behavior:smooth}
+    .glass{background:rgba(16,16,16,.75);backdrop-filter:blur(14px)}
+    .gradient-text{background:linear-gradient(135deg,#1B8CA3,#2456C7);-webkit-background-clip:text;color:transparent}
+    .hero-bg{
+      background:
+        radial-gradient(circle at 15% 20%, rgba(36,86,199,.30), transparent 30%),
+        radial-gradient(circle at 85% 10%, rgba(27,140,163,.25), transparent 28%),
+        radial-gradient(circle at 50% 90%, rgba(27,140,163,.18), transparent 35%),
+        #050505;
     }
   </style>
 </head>
-<body>
-  <div class="card">
-    <h1>Hola, soy Alejandro 👋</h1>
-    <p>Especialista en Power BI, análisis de datos, automatización e inteligencia de negocio.</p>
-    <a href="mailto:tuemail@correo.com">Contáctame</a>
-  </div>
+
+<body class="bg-dark text-white">
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 glass" x-data="{open:false}">
+    <div class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between">
+      <a href="#inicio" class="text-xl font-black tracking-tight">
+        Alejandro<span class="text-cyanx">.</span>Data
+      </a>
+
+      <button class="md:hidden text-2xl" @click="open=!open">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav class="hidden md:flex items-center gap-7 text-sm text-white/75">
+        <a href="#inicio" class="hover:text-white">Inicio</a>
+        <a href="#servicios" class="hover:text-white" data-i18n="nav_services">Servicios</a>
+        <a href="#formacion" class="hover:text-white" data-i18n="nav_training">Formación</a>
+
+        <div class="relative group">
+          <button class="hover:text-white">Portafolio <i class="fa-solid fa-chevron-down text-xs"></i></button>
+          <div class="absolute hidden group-hover:block top-6 bg-panel border border-white/10 rounded-2xl p-3 w-64 shadow-glow">
+            <a href="#proyectos" class="block p-3 rounded-xl hover:bg-white/5">Proyectos de BI</a>
+            <a href="#proyectos" class="block p-3 rounded-xl hover:bg-white/5">Automatizaciones</a>
+            <a href="#proyectos" class="block p-3 rounded-xl hover:bg-white/5">Modelos de Data</a>
+          </div>
+        </div>
+
+        <div class="relative group">
+          <button class="hover:text-white">Tienda <i class="fa-solid fa-chevron-down text-xs"></i></button>
+          <div class="absolute hidden group-hover:block top-6 bg-panel border border-white/10 rounded-2xl p-3 w-64 shadow-glow">
+            <a href="#plantillas" class="block p-3 rounded-xl hover:bg-white/5">Plantillas</a>
+            <a href="#cursos" class="block p-3 rounded-xl hover:bg-white/5">Cursos</a>
+            <a href="#paypal" class="block p-3 rounded-xl hover:bg-white/5">Pago PayPal</a>
+          </div>
+        </div>
+
+        <a href="#contacto" class="hover:text-white" data-i18n="nav_contact">Contacto</a>
+
+        <div class="flex items-center gap-2 border border-white/10 rounded-full p-1 bg-white/5">
+          <button onclick="setLang('es')" class="lang-btn px-3 py-1 rounded-full text-xs font-bold bg-white text-black" id="btn-es">ES</button>
+          <button onclick="setLang('en')" class="lang-btn px-3 py-1 rounded-full text-xs font-bold text-white/70" id="btn-en">EN</button>
+        </div>
+
+        <a href="#paypal" class="px-4 py-2 rounded-full bg-gradient-to-r from-cyanx to-bluex text-white font-semibold" data-es="Comprar" data-en="Buy">Comprar</a>
+      </nav>
+    </div>
+
+    <div x-show="open" class="md:hidden px-5 pb-5 space-y-3 text-white/80">
+      <a href="#inicio" class="block">Inicio</a>
+      <a href="#servicios" class="block">Servicios</a>
+      <a href="#formacion" class="block">Formación</a>
+      <a href="#proyectos" class="block">Portafolio</a>
+      <a href="#plantillas" class="block">Plantillas</a>
+      <a href="#cursos" class="block">Cursos</a>
+      <a href="#contacto" class="block">Contacto</a>
+      <div class="flex items-center gap-2 pt-2">
+        <button onclick="setLang('es')" class="px-4 py-2 rounded-full bg-white text-black text-xs font-bold">ES</button>
+        <button onclick="setLang('en')" class="px-4 py-2 rounded-full border border-white/20 text-white text-xs font-bold">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" class="hero-bg min-h-screen flex items-center pt-24">
+    <div class="max-w-7xl mx-auto px-5 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyanx/40 bg-cyanx/10 text-cyan-100 text-sm mb-6">
+          <i class="fa-solid fa-chart-line"></i> Economist | Big Data | Business & Data Analytics | AI
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-black leading-tight tracking-tight">
+          Transformo datos en <span class="gradient-text">soluciones de negocio</span>
+        </h1>
+
+        <p class="text-xl text-white/70 mt-6 max-w-2xl">
+          Soy Alejandro Suárez. Desarrollo dashboards, automatizaciones, modelos de análisis,
+          soluciones BI y estrategias data-driven para empresas.
+        </p>
+
+        <div class="flex flex-wrap gap-4 mt-8">
+          <a href="#proyectos" class="px-6 py-4 rounded-2xl bg-gradient-to-r from-cyanx to-bluex font-bold shadow-glow">
+            Ver portafolio
+          </a>
+          <a href="#plantillas" class="px-6 py-4 rounded-2xl border border-white/15 hover:bg-white/5 font-bold">
+            Comprar plantillas
+          </a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 mt-10 max-w-xl">
+          <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+            <div class="text-3xl font-black">15m→2m</div>
+            <div class="text-sm text-white/60">Optimización ETL</div>
+          </div>
+          <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+            <div class="text-3xl font-black">2h→7m</div>
+            <div class="text-sm text-white/60">Refresh BI</div>
+          </div>
+          <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+            <div class="text-3xl font-black">EC+PE</div>
+            <div class="text-sm text-white/60">Data binacional</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-[2rem] bg-panel border border-white/10 p-6 shadow-glow">
+        <div class="rounded-[1.5rem] bg-panel2 border border-white/10 p-6">
+          <p class="text-white/60 text-sm mb-3">Perfil profesional</p>
+          <h2 class="text-3xl font-black">Data & BI Consultant</h2>
+          <p class="text-white/70 mt-4">
+            Power BI, Power Query, DAX, SQL, Python, R, Fabric, Power Automate,
+            Supply Chain, S&OP y automatización de procesos.
+          </p>
+
+          <div class="mt-6 space-y-3">
+            <div class="flex justify-between"><span>Power BI / DAX</span><span class="text-cyanx">Avanzado</span></div>
+            <div class="h-2 bg-white/10 rounded-full"><div class="h-2 w-[95%] bg-cyanx rounded-full"></div></div>
+
+            <div class="flex justify-between"><span>Python / SQL</span><span class="text-cyanx">Avanzado</span></div>
+            <div class="h-2 bg-white/10 rounded-full"><div class="h-2 w-[88%] bg-cyanx rounded-full"></div></div>
+
+            <div class="flex justify-between"><span>Automatización</span><span class="text-cyanx">Pro</span></div>
+            <div class="h-2 bg-white/10 rounded-full"><div class="h-2 w-[84%] bg-cyanx rounded-full"></div></div>
+          </div>
+
+          <div class="mt-7 flex gap-3">
+            <a href="mailto:alejo3399alejo@gmail.com" class="w-11 h-11 grid place-items-center rounded-full bg-white/10 hover:bg-white/20">
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/alejandro-su%C3%A1rez-2982581a3" target="_blank" class="w-11 h-11 grid place-items-center rounded-full bg-white/10 hover:bg-white/20">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://wa.me/593995675584" target="_blank" class="w-11 h-11 grid place-items-center rounded-full bg-white/10 hover:bg-white/20">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios" class="py-24 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-5">
+      <h2 class="text-4xl md:text-5xl font-black mb-4" data-i18n="services_title">Servicios</h2>
+      <p class="text-white/60 max-w-2xl mb-10">Soluciones enfocadas en datos, automatización y mejora real del negocio.</p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-panel border border-white/10 rounded-3xl p-7 hover:-translate-y-1 transition">
+          <i class="fa-solid fa-chart-pie text-4xl text-cyanx mb-5"></i>
+          <h3 class="text-2xl font-bold">Dashboards BI</h3>
+          <p class="text-white/60 mt-3">Power BI, KPIs ejecutivos, seguimiento comercial, financiero y operativo.</p>
+        </div>
+
+        <div class="bg-panel border border-white/10 rounded-3xl p-7 hover:-translate-y-1 transition">
+          <i class="fa-solid fa-robot text-4xl text-cyanx mb-5"></i>
+          <h3 class="text-2xl font-bold">Automatización</h3>
+          <p class="text-white/60 mt-3">Power Automate, flujos, reportería automática, APIs y procesos sin tareas manuales.</p>
+        </div>
+
+        <div class="bg-panel border border-white/10 rounded-3xl p-7 hover:-translate-y-1 transition">
+          <i class="fa-solid fa-database text-4xl text-cyanx mb-5"></i>
+          <h3 class="text-2xl font-bold">Data Engineering</h3>
+          <p class="text-white/60 mt-3">ETL, modelos semánticos, SQL, Python, Fabric y arquitectura de datos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos" class="py-24 bg-white/[.03] border-y border-white/10">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+        <div>
+          <h2 class="text-4xl md:text-5xl font-black" data-i18n="projects_title">Portafolio de proyectos</h2>
+          <p class="text-white/60 mt-3">Espacio para mostrar tus casos, dashboards, reportes y automatizaciones.</p>
+        </div>
+        <a href="#contacto" class="px-5 py-3 rounded-2xl border border-white/15 hover:bg-white/5">Solicitar demo</a>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="bg-panel border border-white/10 rounded-3xl overflow-hidden">
+          <div class="h-44 bg-gradient-to-br from-cyanx/40 to-bluex/40 grid place-items-center text-5xl">
+            <i class="fa-solid fa-gauge-high"></i>
+          </div>
+          <div class="p-6">
+            <span class="text-xs text-cyanx font-bold">POWER BI</span>
+            <h3 class="text-2xl font-bold mt-2">Dashboard Comercial</h3>
+            <p class="text-white/60 mt-3">Seguimiento de ventas, presupuesto, KPIs, país, asesor y producto.</p>
+          </div>
+        </article>
+
+        <article class="bg-panel border border-white/10 rounded-3xl overflow-hidden">
+          <div class="h-44 bg-gradient-to-br from-bluex/40 to-cyanx/40 grid place-items-center text-5xl">
+            <i class="fa-solid fa-gears"></i>
+          </div>
+          <div class="p-6">
+            <span class="text-xs text-cyanx font-bold">AUTOMATIZACIÓN</span>
+            <h3 class="text-2xl font-bold mt-2">Flujos Operativos</h3>
+            <p class="text-white/60 mt-3">Automatización de reportes, alertas, actualización de datos y procesos repetitivos.</p>
+          </div>
+        </article>
+
+        <article class="bg-panel border border-white/10 rounded-3xl overflow-hidden">
+          <div class="h-44 bg-gradient-to-br from-cyanx/40 to-bluex/40 grid place-items-center text-5xl">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <div class="p-6">
+            <span class="text-xs text-cyanx font-bold">DATA SCIENCE</span>
+            <h3 class="text-2xl font-bold mt-2">Modelos Analíticos</h3>
+            <p class="text-white/60 mt-3">Forecast, segmentación, scoring, análisis de variabilidad y toma de decisiones.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FORMACION / AUTORIDAD -->
+  <section id="formacion" class="py-24">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyanx/40 bg-cyanx/10 text-cyan-100 text-sm mb-6">
+            <i class="fa-solid fa-graduation-cap"></i> Formación + experiencia real de negocio
+          </span>
+          <h2 class="text-4xl md:text-5xl font-black leading-tight">
+            No vendo solo dashboards. Construyo <span class="gradient-text">sistemas de decisión</span>.
+          </h2>
+          <p class="text-white/70 mt-6 text-lg">
+            Mi enfoque combina economía, Big Data, ingeniería de datos, analítica, inteligencia artificial,
+            supply chain y automatización. Eso permite crear soluciones que no solo se ven bien:
+            ayudan a vender más, controlar mejor y decidir más rápido.
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-4 mt-8">
+            <div class="rounded-3xl bg-panel border border-white/10 p-5">
+              <div class="text-cyanx text-2xl mb-2"><i class="fa-solid fa-user-tie"></i></div>
+              <h3 class="font-bold text-xl">Visión ejecutiva</h3>
+              <p class="text-white/60 mt-2">Indicadores pensados para gerencia, estrategia y acción.</p>
+            </div>
+            <div class="rounded-3xl bg-panel border border-white/10 p-5">
+              <div class="text-cyanx text-2xl mb-2"><i class="fa-solid fa-code-branch"></i></div>
+              <h3 class="font-bold text-xl">Base técnica</h3>
+              <p class="text-white/60 mt-2">SQL, Python, Power BI, DAX, ETL, Fabric y automatización.</p>
+            </div>
+            <div class="rounded-3xl bg-panel border border-white/10 p-5">
+              <div class="text-cyanx text-2xl mb-2"><i class="fa-solid fa-bullseye"></i></div>
+              <h3 class="font-bold text-xl">Enfoque comercial</h3>
+              <p class="text-white/60 mt-2">Soluciones orientadas a ventas, rentabilidad y seguimiento.</p>
+            </div>
+            <div class="rounded-3xl bg-panel border border-white/10 p-5">
+              <div class="text-cyanx text-2xl mb-2"><i class="fa-solid fa-bolt"></i></div>
+              <h3 class="font-bold text-xl">Entrega práctica</h3>
+              <p class="text-white/60 mt-2">Herramientas listas para usar, no teoría guardada en PDFs.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-cyanx/15 to-bluex/15 border border-white/10 rounded-[2rem] p-8 shadow-glow">
+          <h3 class="text-3xl font-black mb-6">Formación destacada</h3>
+          <div class="space-y-4">
+            <div class="bg-white/5 rounded-2xl p-5 border border-white/10">
+              <p class="font-bold">Máster en Big Data y Ciencia de Datos</p>
+              <p class="text-white/55 text-sm">Universidad de los Hemisferios</p>
+            </div>
+            <div class="bg-white/5 rounded-2xl p-5 border border-white/10">
+              <p class="font-bold">Máster en Ingeniería de Datos y Big Data</p>
+              <p class="text-white/55 text-sm">IMF, Madrid</p>
+            </div>
+            <div class="bg-white/5 rounded-2xl p-5 border border-white/10">
+              <p class="font-bold">Microsoft Certified: Power BI Data Analyst Associate</p>
+              <p class="text-white/55 text-sm">Microsoft</p>
+            </div>
+            <div class="bg-white/5 rounded-2xl p-5 border border-white/10">
+              <p class="font-bold">Economista</p>
+              <p class="text-white/55 text-sm">Universidad Central del Ecuador</p>
+            </div>
+          </div>
+
+          <a href="#plantillas" class="block text-center mt-8 px-6 py-4 rounded-2xl bg-gradient-to-r from-cyanx to-bluex font-black">
+            Ver productos digitales
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANTILLAS -->
+  <section id="plantillas" class="py-24">
+    <div class="max-w-7xl mx-auto px-5">
+      <h2 class="text-4xl md:text-5xl font-black mb-4" data-i18n="templates_title">Venta de plantillas</h2>
+      <p class="text-white/60 mb-10">Herramientas listas para descargar, adaptar y usar en tu negocio. Ahorra horas de trabajo y empieza con una estructura profesional desde el primer día.</p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-panel border border-white/10 rounded-3xl p-7">
+          <h3 class="text-2xl font-bold">Plantilla Power BI</h3>
+          <p class="text-white/60 mt-3">Dashboard ejecutivo para ventas, KPIs y presupuesto.</p>
+          <div class="text-3xl font-black mt-6">$25</div>
+          <a href="#paypal" class="block text-center mt-6 px-5 py-3 rounded-2xl bg-gradient-to-r from-cyanx to-bluex font-bold">Comprar</a>
+        </div>
+
+        <div class="bg-panel border border-white/10 rounded-3xl p-7">
+          <h3 class="text-2xl font-bold">Excel Automatizado</h3>
+          <p class="text-white/60 mt-3">Control, seguimiento, inventario, planificación o indicadores.</p>
+          <div class="text-3xl font-black mt-6">$15</div>
+          <a href="#paypal" class="block text-center mt-6 px-5 py-3 rounded-2xl bg-gradient-to-r from-cyanx to-bluex font-bold">Comprar</a>
+        </div>
+
+        <div class="bg-panel border border-white/10 rounded-3xl p-7">
+          <h3 class="text-2xl font-bold">Pack Data Pro</h3>
+          <p class="text-white/60 mt-3">Plantillas + guía + estructura base para análisis empresarial.</p>
+          <div class="text-3xl font-black mt-6">$49</div>
+          <a href="#paypal" class="block text-center mt-6 px-5 py-3 rounded-2xl bg-gradient-to-r from-cyanx to-bluex font-bold">Comprar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURSOS -->
+  <section id="cursos" class="py-24 bg-white/[.03] border-y border-white/10">
+    <div class="max-w-7xl mx-auto px-5">
+      <h2 class="text-4xl md:text-5xl font-black mb-4" data-i18n="courses_title">Cursos</h2>
+      <p class="text-white/60 mb-10">Aprende con enfoque práctico: casos reales, plantillas aplicables y métodos para convertir datos en resultados.</p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-panel border border-white/10 rounded-3xl p-7">
+          <i class="fa-solid fa-chart-simple text-4xl text-cyanx mb-5"></i>
+          <h3 class="text-2xl font-bold">Power BI desde cero</h3>
+          <p class="text-white/60 mt-3">Modelado, medidas DAX, dashboards y publicación.</p>
+          <a href="#paypal" class="inline-block mt-6 text-cyanx font-bold">Comprar curso →</a>
+        </div>
+
+        <div class="bg-panel border border-white/10 rounded-3xl p-7">
+          <i class="fa-brands fa-python text-4xl text-cyanx mb-5"></i>
+          <h3 class="text-2xl font-bold">Python para data</h3>
+          <p class="text-white/60 mt-3">Pandas, limpieza, análisis, gráficos y automatización.</p>
+          <a href="#paypal" class="inline-block mt-6 text-cyanx font-bold">Comprar curso →</a>
+        </div>
+
+        <div class="bg-panel border border-white/10 rounded-3xl p-7">
+          <i class="fa-solid fa-bolt text-4xl text-cyanx mb-5"></i>
+          <h3 class="text-2xl font-bold">Automatización empresarial</h3>
+          <p class="text-white/60 mt-3">Power Automate, APIs, reportes automáticos y flujos.</p>
+          <a href="#paypal" class="inline-block mt-6 text-cyanx font-bold">Comprar curso →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAYPAL -->
+  <section id="paypal" class="py-24">
+    <div class="max-w-5xl mx-auto px-5">
+      <div class="bg-gradient-to-br from-cyanx/20 to-bluex/20 border border-white/10 rounded-[2rem] p-8 md:p-12 text-center shadow-glow">
+        <i class="fa-brands fa-paypal text-6xl text-cyanx mb-6"></i>
+        <h2 class="text-4xl md:text-5xl font-black" data-i18n="paypal_title">Botón de pago PayPal</h2>
+        <p class="text-white/70 mt-4 max-w-2xl mx-auto">
+          Solo reemplaza el enlace del botón por tu link real de PayPal, Payphone, Stripe o formulario de compra.
+        </p>
+
+        <!-- CAMBIA ESTE ENLACE POR TU LINK REAL DE PAYPAL -->
+        <a href="https://www.paypal.com/paypalme/TUUSUARIO" target="_blank"
+           class="inline-block mt-8 px-8 py-4 rounded-2xl bg-gradient-to-r from-cyanx to-bluex font-black text-lg">
+          Pagar ahora
+        </a>
+
+        <p class="text-xs text-white/45 mt-4">Edita en el HTML: https://www.paypal.com/paypalme/TUUSUARIO</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE MI -->
+  <section id="sobre-mi" class="py-24 bg-white/[.03] border-y border-white/10">
+    <div class="max-w-7xl mx-auto px-5 grid lg:grid-cols-2 gap-10">
+      <div>
+        <h2 class="text-4xl md:text-5xl font-black" data-i18n="about_title">Sobre mí</h2>
+        <p class="text-white/70 mt-6">
+          Economista con formación en Big Data, ciencia de datos, ingeniería de datos,
+          analítica, visualización, Python, R, SQL, Power BI, DAX, Power Query y automatización.
+        </p>
+        <p class="text-white/70 mt-4">
+          Experiencia en inteligencia de negocios, supply chain, S&OP, automatización de reportes,
+          modelos de datos, dashboards ejecutivos y análisis estratégico para dirección.
+        </p>
+      </div>
+
+      <div class="bg-panel border border-white/10 rounded-3xl p-7">
+        <h3 class="text-2xl font-bold mb-5">Stack principal</h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="px-4 py-2 rounded-full bg-white/10">Power BI</span>
+          <span class="px-4 py-2 rounded-full bg-white/10">DAX</span>
+          <span class="px-4 py-2 rounded-full bg-white/10">Power Query</span>
+          <span class="px-4 py-2 rounded-full bg-white/10">SQL</span>
+          <span class="px-4 py-2 rounded-full bg-white/10">Python</span>
+          <span class="px-4 py-2 rounded-full bg-white/10">R</span>
+          <span class="px-4 py-2 rounded-full bg-white/10">Fabric</span>
+          <span class="px-4 py-2 rounded-full bg-white/10">Power Automate</span>
+          <span class="px-4 py-2 rounded-full bg-white/10">Supply Chain</span>
+          <span class="px-4 py-2 rounded-full bg-white/10">AI</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="py-24">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="bg-panel border border-white/10 rounded-[2rem] p-8 md:p-12 grid lg:grid-cols-2 gap-10">
+        <div>
+          <h2 class="text-4xl md:text-5xl font-black" data-i18n="contact_title">Trabajemos juntos</h2>
+          <p class="text-white/70 mt-4">
+            Escríbeme para dashboards, automatizaciones, consultoría, cursos o plantillas personalizadas.
+          </p>
+
+          <div class="mt-8 space-y-4 text-white/75">
+            <p><i class="fa-solid fa-location-dot text-cyanx mr-3"></i>Quito, Ecuador</p>
+            <p><i class="fa-solid fa-phone text-cyanx mr-3"></i>+593 995675584</p>
+            <p><i class="fa-solid fa-envelope text-cyanx mr-3"></i>alejo3399alejo@gmail.com</p>
+            <p><i class="fa-brands fa-linkedin text-cyanx mr-3"></i>alejandro-suárez-2982581a3</p>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <form action="https://formsubmit.co/alejo3399alejo@gmail.com" method="POST" class="space-y-4">
+            <input name="nombre" class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-cyanx" placeholder="Nombre" required>
+            <input name="email" type="email" class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-cyanx" placeholder="Correo" required>
+            <textarea name="mensaje" class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-cyanx h-36" placeholder="Cuéntame qué necesitas" required></textarea>
+
+            <input type="hidden" name="_subject" value="Nuevo contacto desde la web de Alejandro Suárez">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+
+            <button type="submit" class="w-full px-6 py-4 rounded-2xl bg-gradient-to-r from-cyanx to-bluex font-black hover:scale-[1.01] transition">
+              Enviar por correo
+            </button>
+          </form>
+
+          <a href="https://wa.me/593995675584?text=Hola%20Alejandro,%20quiero%20informaci%C3%B3n%20sobre%20tus%20servicios%20de%20datos%2C%20BI%20o%20automatizaci%C3%B3n."
+             target="_blank"
+             class="block text-center px-6 py-4 rounded-2xl border border-green-400/40 bg-green-500/10 hover:bg-green-500/20 font-black">
+            <i class="fa-brands fa-whatsapp mr-2"></i> <span data-i18n="whatsapp_btn">Escribirme por WhatsApp</span>
+          </a>
+
+          <p class="text-xs text-white/45">La primera vez, FormSubmit pedirá confirmar el correo para activar los envíos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-white/10 py-8 text-center text-white/45">
+    © 2026 Alejandro Suárez. Data, BI & Business Analytics.
+  </footer>
+
+
+  <script>
+    const translations = {
+      es: {
+        nav_services:"Servicios", nav_training:"Formación", nav_contact:"Contacto",
+        hero_portfolio:"Ver portafolio", hero_templates:"Comprar plantillas",
+        services_title:"Servicios", projects_title:"Portafolio de proyectos",
+        templates_title:"Venta de plantillas", courses_title:"Cursos",
+        paypal_title:"Botón de pago PayPal", contact_title:"Trabajemos juntos",
+        send_email:"Enviar por correo", whatsapp_btn:"Escribirme por WhatsApp",
+        pay_now:"Pagar ahora", about_title:"Sobre mí"
+      },
+      en: {
+        nav_services:"Services", nav_training:"Training", nav_contact:"Contact",
+        hero_portfolio:"View portfolio", hero_templates:"Buy templates",
+        services_title:"Services", projects_title:"Project portfolio",
+        templates_title:"Templates store", courses_title:"Courses",
+        paypal_title:"PayPal payment button", contact_title:"Let's work together",
+        send_email:"Send by email", whatsapp_btn:"Message me on WhatsApp",
+        pay_now:"Pay now", about_title:"About me"
+      }
+    };
+
+    function setLang(lang){
+      document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const key = el.getAttribute("data-i18n");
+        if(translations[lang][key]) el.textContent = translations[lang][key];
+      });
+
+      document.querySelectorAll("[data-es][data-en]").forEach(el=>{
+        el.textContent = el.getAttribute(`data-${lang}`);
+      });
+
+      const es = document.getElementById("btn-es");
+      const en = document.getElementById("btn-en");
+      if(es && en){
+        es.className = lang === "es"
+          ? "lang-btn px-3 py-1 rounded-full text-xs font-bold bg-white text-black"
+          : "lang-btn px-3 py-1 rounded-full text-xs font-bold text-white/70";
+        en.className = lang === "en"
+          ? "lang-btn px-3 py-1 rounded-full text-xs font-bold bg-white text-black"
+          : "lang-btn px-3 py-1 rounded-full text-xs font-bold text-white/70";
+      }
+
+      localStorage.setItem("siteLang", lang);
+      document.documentElement.lang = lang;
+    }
+
+    setLang(localStorage.getItem("siteLang") || "es");
+  </script>
+
 </body>
 </html>
